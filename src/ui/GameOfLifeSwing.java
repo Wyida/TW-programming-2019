@@ -41,7 +41,7 @@ public class GameOfLifeSwing extends JFrame {
         gameBtn.addActionListener(new StartGameActioner());
         JButton clearBoardBtn = new JButton("清除");
         clearBoardBtn.addActionListener(new ClearBoardActioner());
-        JPanel buttonPanel = new JPanel(new GridLayout(2, 2));
+        JPanel buttonPanel = new JPanel(new GridLayout(4, 1));
         buttonPanel.add(gameBtn);
         buttonPanel.add(clearBoardBtn);
         JLabel durationPromtLabel = new JLabel("控制动画速度（单位ms）");
@@ -67,9 +67,9 @@ public class GameOfLifeSwing extends JFrame {
         for (int y = 0; y < state.length; y++) {
             for (int x = 0; x < state[0].length; x++) {
                 if (state[y][x] == 1) {
-                    cellBtnsMatrix[y][x].setBackground(Color.BLACK);
-                } else {
                     cellBtnsMatrix[y][x].setBackground(Color.WHITE);
+                } else {
+                    cellBtnsMatrix[y][x].setBackground(Color.BLACK);
                 }
             }
         }
@@ -86,7 +86,7 @@ public class GameOfLifeSwing extends JFrame {
                 JButtonAxis text = new JButtonAxis(x, y);
                 text.addActionListener(e -> {
                     int[][] state = matrix.getState();
-                    text.setBackground(Color.BLACK);
+                    text.setBackground(Color.WHITE);
                     state[text.getyValue()][text.getxValue()] = 1;
                     matrix.setState(state);
                 });

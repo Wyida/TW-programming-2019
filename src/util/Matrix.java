@@ -19,7 +19,7 @@ public class Matrix {
     //生命状态矩阵，1表示活，0表示死
     private int[][] state;
 
-    public Matrix(int height, int width, int roundTime, int[][] state) {
+    private Matrix(int height, int width, int roundTime, int[][] state) {
         this.height = height;
         this.width = width;
         this.roundTime = roundTime;
@@ -108,8 +108,8 @@ public class Matrix {
     public String toString() {
 
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < state.length; i++) {
-            sb.append(Arrays.toString(state[i]) + "\n");
+        for (int[] aState : state) {
+            sb.append(Arrays.toString(aState)).append("\n");
         }
         return sb.toString();
     }
