@@ -27,6 +27,7 @@ public class GameOfLifeSwing extends JFrame {
     private Matrix matrix;
 
     private JPanel gridPanel = new JPanel();
+    private JPanel buttonPanel = new JPanel();
 
     private JButton[][] cellBtnsMatrix;
 
@@ -57,7 +58,6 @@ public class GameOfLifeSwing extends JFrame {
         gameBtn.addActionListener(new StartGameActioner());
         JButton clearBoardBtn = new JButton("复位");
         clearBoardBtn.addActionListener(new ClearBoardActioner());
-        JPanel buttonPanel = new JPanel(new GridLayout(4, 1));
         JLabel durationPromtLabel = new JLabel("控制动画速度（单位ms）");
 
         buttonPanel.add(durationPromtLabel);
@@ -90,6 +90,7 @@ public class GameOfLifeSwing extends JFrame {
         int cols = matrix.getWidth();
         gridPanel = new JPanel();
         gridPanel.setLayout(new GridLayout(rows, cols));
+        buttonPanel.setLayout(new GridLayout(4, 1));
         cellBtnsMatrix = new JButton[rows][cols];
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < cols; x++) {
