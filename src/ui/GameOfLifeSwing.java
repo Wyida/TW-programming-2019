@@ -1,8 +1,7 @@
 package ui;
 
-import util.MatrixState;
 import util.JButtonAxis;
-import util.Utils;
+import util.Matrix;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,7 +24,7 @@ public class GameOfLifeSwing extends JFrame {
     //游戏结束的标志
     private boolean stop;
 
-    private MatrixState matrixState;
+    private Matrix matrix;
 
     private JPanel gridPanel = new JPanel();
 
@@ -41,7 +40,7 @@ public class GameOfLifeSwing extends JFrame {
         setTitle("生命游戏");
         gameBtn.addActionListener(new StartGameActioner());
         JButton clearBoardBtn = new JButton("清除");
-        clearBoardBtn.addActionListener(new clearBoardActioner());
+        clearBoardBtn.addActionListener(new ClearBoardActioner());
         JPanel buttonPanel = new JPanel(new GridLayout(2, 2));
         buttonPanel.add(gameBtn);
         buttonPanel.add(clearBoardBtn);
@@ -53,7 +52,7 @@ public class GameOfLifeSwing extends JFrame {
         isStart = false;
         stop = true;
         gameBtn.setText("开始游戏");
-        matrixState = Utils.initMatrix();
+        matrix = Matrix.initMatrix(30,30,200,Matrix.initState());
         initGridLayout();
         repaintMatrix();
         gridPanel.updateUI();
@@ -63,9 +62,8 @@ public class GameOfLifeSwing extends JFrame {
     }
 
 
-
     private void repaintMatrix() {
-        int[][] state = matrixState.getState();
+        int[][] state = matrix.getState();
         for (int y = 0; y < state.length; y++) {
             for (int x = 0; x < state[0].length; x++) {
                 if (state[y][x] == 1) {
@@ -78,8 +76,8 @@ public class GameOfLifeSwing extends JFrame {
     }
 
     private void initGridLayout() {
-        int rows = matrixState.getHeight();
-        int cols = matrixState.getWidth();
+        int rows = matrix.getHeight();
+        int cols = matrix.getWidth();
         gridPanel = new JPanel();
         gridPanel.setLayout(new GridLayout(rows, cols));
         cellBtnsMatrix = new JButton[rows][cols];
@@ -87,10 +85,10 @@ public class GameOfLifeSwing extends JFrame {
             for (int x = 0; x < cols; x++) {
                 JButtonAxis text = new JButtonAxis(x, y);
                 text.addActionListener(e -> {
-                    int[][] state = matrixState.getState();
+                    int[][] state = matrix.getState();
                     text.setBackground(Color.BLACK);
                     state[text.getyValue()][text.getxValue()] = 1;
-                    matrixState.setMatrix(state);
+                    matrix.setState(state);
                 });
                 cellBtnsMatrix[y][x] = text;
                 gridPanel.add(text);
@@ -100,7 +98,6 @@ public class GameOfLifeSwing extends JFrame {
     }
 
     private class StartGameActioner implements ActionListener {
-
         @Override
         public void actionPerformed(ActionEvent e) {
             if (!isStart) {
@@ -110,7 +107,7 @@ public class GameOfLifeSwing extends JFrame {
                 } catch (NumberFormatException e1) {
                     roundTime = DEFAULT_ROUNDTIME;
                 }
-                new Thread(new GameControlTask()).start();
+                new Thread(new GameCoreTask()).start();
                 isStart = true;
                 stop = false;
                 gameBtn.setText("暂停游戏");
@@ -122,26 +119,25 @@ public class GameOfLifeSwing extends JFrame {
         }
     }
 
-    private class clearBoardActioner implements ActionListener {
-
+    private class ClearBoardActioner implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             isStart = false;
             stop = true;
             gameBtn.setText("开始游戏");
-            matrixState = Utils.initMatrix();
+            matrix.setEmptyState();
             initGridLayout();
             repaintMatrix();
             gridPanel.updateUI();
         }
     }
 
-    private class GameControlTask implements Runnable {
+    private class GameCoreTask implements Runnable {
         @Override
         public void run() {
 
             while (!stop) {
-                matrixState.transform();
+                matrix.transform();
                 repaintMatrix();
 
                 try {
