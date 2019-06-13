@@ -37,11 +37,21 @@ public class MatrixTest {
         };
         matrix.transform();
         Assert.assertArrayEquals(expected, matrix.getState());
+
         expected = new int[][]{
-                {0, 1, 0},
                 {0, 0, 0},
-                {1, 1, 1}
+                {1, 0, 1},
+                {0, 1, 0}
         };
+        matrix.transform();
+        Assert.assertArrayEquals(expected, matrix.getState());
+
+        expected = new int[][]{
+                {0, 0, 0},
+                {0, 1, 0},
+                {0, 1, 0}
+        };
+        matrix.transform();
         Assert.assertArrayEquals(expected, matrix.getState());
     }
 
