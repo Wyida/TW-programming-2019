@@ -1,7 +1,7 @@
 package ui;
 
-import util.JButtonAxis;
-import util.Matrix;
+import model.JButtonAxis;
+import model.Matrix;
 
 import javax.swing.*;
 import java.awt.*;
