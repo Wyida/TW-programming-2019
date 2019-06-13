@@ -37,28 +37,38 @@ public class GameOfLifeSwing extends JFrame {
     private int roundTime = DEFAULT_ROUNDTIME;
 
     public GameOfLifeSwing() {
+
+        isStart = false;
+        stop = true;
+        matrix = Matrix.initMatrix(100, 100, 200, Matrix.initState());
+        initUi();
+
+    }
+
+
+    public void initUi() {
+        this.setSize(1000, 1000);
+        this.setVisible(true);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        initGridLayout();
         setTitle("生命游戏");
+        gameBtn.setText("开始游戏");
         gameBtn.addActionListener(new StartGameActioner());
         JButton clearBoardBtn = new JButton("清除");
         clearBoardBtn.addActionListener(new ClearBoardActioner());
         JPanel buttonPanel = new JPanel(new GridLayout(4, 1));
-        buttonPanel.add(gameBtn);
-        buttonPanel.add(clearBoardBtn);
         JLabel durationPromtLabel = new JLabel("控制动画速度（单位ms）");
+
         buttonPanel.add(durationPromtLabel);
         buttonPanel.add(durationTextField);
+        buttonPanel.add(gameBtn);
+        buttonPanel.add(clearBoardBtn);
         buttonPanel.setBackground(Color.WHITE);
-        getContentPane().add("North", buttonPanel);
-        isStart = false;
-        stop = true;
-        gameBtn.setText("开始游戏");
-        matrix = Matrix.initMatrix(100,100,200,Matrix.initState());
-        initGridLayout();
+        getContentPane().add("South", buttonPanel);
         repaintMatrix();
         gridPanel.updateUI();
-        this.setSize(1000, 1000);
-        this.setVisible(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
     }
 
 
