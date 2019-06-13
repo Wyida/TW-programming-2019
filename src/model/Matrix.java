@@ -13,7 +13,7 @@ public class Matrix {
     //矩阵宽度
     private int width;
 
-    //变化时间
+    //变换时间
     private int roundTime;
 
     //生命状态矩阵，1表示活，0表示死
