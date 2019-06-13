@@ -52,7 +52,7 @@ public class GameOfLifeSwing extends JFrame {
         isStart = false;
         stop = true;
         gameBtn.setText("开始游戏");
-        matrix = Matrix.initMatrix(30,30,200,Matrix.initState());
+        matrix = Matrix.initMatrix(100,100,200,Matrix.initState());
         initGridLayout();
         repaintMatrix();
         gridPanel.updateUI();
