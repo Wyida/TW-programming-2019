@@ -55,7 +55,7 @@ public class GameOfLifeSwing extends JFrame {
         setTitle("Game of Life");
         gameBtn.setText("开始游戏");
         gameBtn.addActionListener(new StartGameActioner());
-        JButton clearBoardBtn = new JButton("清除");
+        JButton clearBoardBtn = new JButton("复位");
         clearBoardBtn.addActionListener(new ClearBoardActioner());
         JPanel buttonPanel = new JPanel(new GridLayout(4, 1));
         JLabel durationPromtLabel = new JLabel("控制动画速度（单位ms）");
