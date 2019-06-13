@@ -46,13 +46,13 @@ public class GameOfLifeSwing extends JFrame {
     }
 
 
-    public void initUi() {
+    private void initUi() {
         this.setSize(1000, 1000);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         initGridLayout();
-        setTitle("生命游戏");
+        setTitle("Game of Life");
         gameBtn.setText("开始游戏");
         gameBtn.addActionListener(new StartGameActioner());
         JButton clearBoardBtn = new JButton("清除");

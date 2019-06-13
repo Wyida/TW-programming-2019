@@ -49,35 +49,27 @@ public class Matrix {
     //计算每个细胞周围存活的细胞个数
     int lifedNum(int y, int x) {
         int num = 0;
-        //左边
         if (x != 0) {
             num += state[y][x - 1];
         }
-        //左上角
         if (x != 0 && y != 0) {
             num += state[y - 1][x - 1];
         }
-        //上边
         if (y != 0) {
             num += state[y - 1][x];
         }
-        //右上
         if (x != width - 1 && y != 0) {
             num += state[y - 1][x + 1];
         }
-        //右边
         if (x != width - 1) {
             num += state[y][x + 1];
         }
-        //右下
         if (x != width - 1 && y != height - 1) {
             num += state[y + 1][x + 1];
         }
-        //下边
         if (y != height - 1) {
             num += state[y + 1][x];
         }
-        //左下
         if (x != 0 && y != height - 1) {
             num += state[y + 1][x - 1];
         }
