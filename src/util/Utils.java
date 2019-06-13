@@ -1,17 +1,15 @@
-package yy.gameOfLife.util;
-
-import java.io.*;
+package util;
 
 /**
  * Matrix初始化类
  * Created by Yida on 2019/6/12.
  */
 public class Utils {
-    public static CurrentMatrix initMatrix() {
+    public static MatrixState initMatrix() {
         try {
             int width = 30;
             int height = 30;
-            int duration = 3000000;
+            int roundTime = 3000000;
             int totalNum = 900;
             int[][] matrix = new int[height][width];
             for (int i = 0; i < height; i++) {
@@ -19,8 +17,7 @@ public class Utils {
                     matrix[i][j] = 0;
                 }
             }
-            CurrentMatrix currentMatrix = new CurrentMatrix(height, width, duration, totalNum, matrix);
-            return currentMatrix;
+            return new MatrixState(height, width, roundTime, totalNum, matrix);
         } catch (Exception e) {
             e.printStackTrace();
         }
